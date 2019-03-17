@@ -25,24 +25,30 @@ namespace duomenu_apdorojimas
 
                 oStudentList.Add(oStudent);
 
-                Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 'T', jei norite paskaiciuoti balus - bet koki kita simboliu");
+                Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 't', jei norite paskaiciuoti balus - bet koki kita simboli");
                 sInput = Console.ReadLine();
-            } while (sInput == "T");
+            } while (sInput == "t");
 
             outputScores(oStudentList);
         }
 
         protected static void outputScores(List<Student> oStudentList)
         {
+            const string sAverage = "v";
+            const string sMedian = "m";
             string sInput;
+
             GradeTable oTable = new GradeTable();
 
             Boolean isAverage;
 
-            Console.WriteLine("Jei norite skaiciuoti vidurki - iveskite 'V', jei norite skaiciuoti mediana - bet koki kita sibmoliu");
-            sInput = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Jei norite skaiciuoti namu darbu vidurki - iveskite 'v', jei norite skaiciuoti mediana - 'm'");
+                sInput = Console.ReadLine();
+            } while (sInput != sAverage && sInput != sMedian);
 
-            isAverage = (sInput == "V");
+            isAverage = (sInput == sAverage);
 
             oTable.printLine();
             oTable.printRow(new string[] { "Vardas", "Pavarde", isAverage ? "Galutinis(Vid.)" : "Galutinis(Med.)" });
@@ -68,7 +74,7 @@ namespace duomenu_apdorojimas
             Console.WriteLine("Iveskite studento pavarde:");
             oStudent.setLastName(Console.ReadLine());
 
-            Console.WriteLine("Iveskite studento namu darbu pazymius. Iveskite 'r', kad pazymys butu parinktas atsitiktinai, iveskite 'x', kad baigti ivedima:");
+            Console.WriteLine("Iveskite studento namu darbu pazymius. Iveskite 'r', kad pazymys butu parinktas atsitiktinai, iveskite 'x', kad baigtume ivedima:");
             inputString = Console.ReadLine();
 
             // HomeWork grades
@@ -118,7 +124,16 @@ namespace duomenu_apdorojimas
 
         static void Main(string[] args)
         {
-            averageScores();
+            string sInput;
+
+            do
+            {
+                averageScores();
+
+                Console.WriteLine("Programa baigta. Jei norite iseiti - iveskite 'x', jei norite pakartoti - bet koki kita simboli");
+
+                sInput = Console.ReadLine();
+            } while (sInput != exitString);
         }
     }
 }
