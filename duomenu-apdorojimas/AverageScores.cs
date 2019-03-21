@@ -112,6 +112,16 @@ namespace duomenu_apdorojimas
 
             Student oStudent = new Student();
 
+            oStudent.setFirstName(sEntries[0]);
+            oStudent.setLastName(sEntries[1]);
+
+            for (int i = 2; i < 7; i++)
+            {
+                oStudent.addGrade(sEntries[i]);
+            }
+
+            oStudent.setExamGrade(sEntries[7]);
+
             return oStudent;
         }
 
