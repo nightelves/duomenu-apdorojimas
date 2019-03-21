@@ -7,7 +7,7 @@ namespace duomenu_apdorojimas
 {
     class AverageScores
     {
-        const Boolean INPUT_FROM_FILE = false;
+        const Boolean INPUT_FROM_FILE = true;
         const string EXIT_STRING = "x";
 
         protected List<Student> oStudentList;
@@ -36,6 +36,17 @@ namespace duomenu_apdorojimas
         protected void outputScoresFromFile()
         {
             GradeTable oTable = new GradeTable();
+
+            oTable.printLine();
+            oTable.printRow(new string[] { "Vardas", "Pavarde", "Galutinis(Vid.)", "Galutinis(Med.)" });
+            oTable.printLine();
+
+            oStudentList.Sort((x, y) => string.Compare(x.getFirstName(), y.getFirstName()));
+
+            foreach (Student oStudent in oStudentList)
+            {
+                oTable.printRow(new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) });
+            }
 
             oTable.printLine();
         }
