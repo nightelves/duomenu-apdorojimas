@@ -1,7 +1,8 @@
-﻿using System;
+﻿#define USE_LIST
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace duomenu_apdorojimas
 {
@@ -12,13 +13,20 @@ namespace duomenu_apdorojimas
 
         protected string lastName;
 
-        protected List<int> grades;
-
         protected double examGrade;
+#if USE_LIST
+        protected List<double> grades;
+#else
+        protected double[] gradesArray;
+#endif
 
         public Student()
         {
-            grades = new List<int>();
+#if USE_LIST
+            grades = new List<double>();
+#else
+            gradesArray = null;
+#endif
 
             examGrade = 0;
         }
@@ -43,22 +51,32 @@ namespace duomenu_apdorojimas
             this.lastName = lName;
         }
 
-        public void addGrade(int grade)
+        public void addGrade(double grade)
         {
+#if USE_LIST
             grades.Add(grade);
+#else
+            if (gradesArray == null)
+                gradesArray = new double[0];
+
+            Array.Resize(ref gradesArray, gradesArray.Length + 1);
+
+            gradesArray[gradesArray.Length - 1] = grade;
+
+#endif
         }
 
         public void addGrade(string sGrade)
         {
-            int grade = parseGrade(sGrade);
+            double grade = parseGrade(sGrade);
 
             this.addGrade(grade);
         }
 
-        protected int getRandomGrade()
+        protected double getRandomGrade()
         {
             Random r = new Random();
-            int rInt = r.Next(0, 10);
+            double rInt = r.Next(0, 10);
 
             return rInt;
         }
@@ -77,25 +95,25 @@ namespace duomenu_apdorojimas
             setExamGrade(getRandomGrade());
         }
 
-        public void setExamGrade(int grade)
+        public void setExamGrade(double grade)
         {
             this.examGrade = grade;
         }
 
         public void setExamGrade(string sGrade)
         {
-            int grade = parseGrade(sGrade);
+            double grade = parseGrade(sGrade);
 
             this.setExamGrade(grade);
         }
 
-        protected int parseGrade(string sGrade)
+        protected double parseGrade(string sGrade)
         {
-            int grade;
+            double grade;
 
             try
             {
-                grade = Int32.Parse(sGrade);
+                grade = Double.Parse(sGrade);
 
                 if (grade < 0 || grade > 10)
                     throw new ArgumentException();
@@ -110,8 +128,14 @@ namespace duomenu_apdorojimas
 
         protected double getMedian()
         {
+#if USE_LIST
             var array = grades.ToArray();
+#else
+            if (gradesArray == null)
+                return 0;
 
+            var array = gradesArray;
+#endif
             Array.Sort(array);
 
             var n = array.Length;
@@ -136,10 +160,27 @@ namespace duomenu_apdorojimas
 
         protected double getAverage()
         {
+#if USE_LIST
             if (grades.Count == 0)
                 return 0;
 
             return grades.Average();
+#else
+            double sum = 0;
+            double avg = 0;
+
+            if (gradesArray == null)
+                return 0;
+
+            for (int i = 0; i < gradesArray.Length; i++)
+            {
+                sum += gradesArray[i];
+            }
+
+            avg = sum / gradesArray.Length;
+            
+            return avg;
+#endif
         }
 
         protected double getFinalGrade(Boolean isAverage)
