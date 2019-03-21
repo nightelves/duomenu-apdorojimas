@@ -72,7 +72,38 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
+            const string path = "kursiokai.txt";
+            Boolean bFirstLine = true;
+            string line;
 
+            Console.WriteLine("Nuskaitome is failo.");
+
+            System.IO.StreamReader file = null;
+            try
+            {
+                file = new System.IO.StreamReader(path);
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (bFirstLine)
+                    {
+                        bFirstLine = false;
+                        continue;
+                    }
+
+                    Student oStudent = inputStudentFromLine(line);
+
+                    oStudentList.Add(oStudent);
+                }
+            }
+            catch
+            {
+                Console.WriteLine($"Nepavyko nuskaityti failo '{path}'");
+            }
+            finally
+            {
+                if (file != null)
+                    file.Close();
+            }
         }
 
         protected Student inputStudentFromLine(string sLine)
