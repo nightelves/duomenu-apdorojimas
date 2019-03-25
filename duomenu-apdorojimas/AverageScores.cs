@@ -7,7 +7,7 @@ namespace duomenu_apdorojimas
 {
     class AverageScores
     {
-        const Boolean INPUT_FROM_FILE = true;
+        Boolean bFromFile = true;
         const string EXIT_STRING = "x";
 
         protected List<Student> oStudentList;
@@ -19,7 +19,15 @@ namespace duomenu_apdorojimas
 
         public void inputStudents()
         {
-            if (INPUT_FROM_FILE)
+            string inputString = "";
+
+            Console.WriteLine("Jei norite nuskaityti studentus is failo, iveskit 'f'. Jei norite dirbti su konsole - bet koki kita simboliu.");
+
+            inputString = Console.ReadLine();
+
+            bFromFile = (inputString == "f");
+
+            if (bFromFile)
                 inputFromFile();
             else
                 inputFromConsole();
@@ -27,7 +35,7 @@ namespace duomenu_apdorojimas
 
         public void outputScores()
         {
-            if (INPUT_FROM_FILE)
+            if (bFromFile)
                 outputScoresFromFile();
             else
                 outputScoresFromConsole();
