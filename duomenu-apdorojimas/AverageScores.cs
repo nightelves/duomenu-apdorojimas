@@ -128,18 +128,39 @@ namespace duomenu_apdorojimas
         protected Student inputStudentFromLine(string sLine)
         {
             string[] sEntries = sLine.Split();
-
             Student oStudent = new Student();
+
+            if (sEntries.Length != 8)
+            {
+                Console.WriteLine("Netinkamo dydzio eilute.");
+
+                return oStudent;
+            }
 
             oStudent.setFirstName(sEntries[0]);
             oStudent.setLastName(sEntries[1]);
 
             for (int i = 2; i < 7; i++)
             {
-                oStudent.addGrade(sEntries[i]);
+                try
+                {
+                    oStudent.addGrade(sEntries[i]);
+                }
+                catch
+                {
+                    Console.WriteLine("Netinkamas namu darbu pazymys: " + sEntries[i]);
+                }
             }
 
-            oStudent.setExamGrade(sEntries[7]);
+            try
+            {
+
+                oStudent.setExamGrade(sEntries[7]);
+            }
+            catch
+            {
+                Console.WriteLine("Netinkamas egzamino pazymys: " + sEntries[7]);
+            }
 
             return oStudent;
         }

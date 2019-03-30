@@ -14,14 +14,23 @@ namespace duomenu_apdorojimas
 
             do
             {
-                AverageScores oAvg = new AverageScores();
+                try
+                {
+                    AverageScores oAvg = new AverageScores();
 
-                oAvg.inputStudents();
-                oAvg.outputScores();
+                    oAvg.inputStudents();
+                    oAvg.outputScores();
 
-                Console.WriteLine("Programa baigta. Jei norite iseiti - iveskite 'x', jei norite pakartoti - bet koki kita simboli");
-
-                sInput = Console.ReadLine();
+                    Console.WriteLine("Programa baigta. Jei norite iseiti - iveskite 'x', jei norite pakartoti - bet koki kita simboli");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Nenumatyta klaida: " + ex.Message);
+                }
+                finally
+                {
+                    sInput = Console.ReadLine();
+                }
             } while (sInput != EXIT_STRING);
         }
     }
