@@ -5,7 +5,6 @@ namespace duomenu_apdorojimas
     class Program
     {
         const string EXIT_STRING = "x";
-        
 
         static void Main(string[] args)
         {
