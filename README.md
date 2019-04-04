@@ -19,3 +19,5 @@ Studentų suskirstymas į kategorijas. Išmatuotas programos veikimo laikas nusk
 | 1000          | 00.0474129           |
 | 10000         | 00.1749180           |
 | 100000        | 01.3508633           |
+
+Didėjant studentų skaičiui, didėja ir veikimo laikas.
