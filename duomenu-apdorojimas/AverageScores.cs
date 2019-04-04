@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace duomenu_apdorojimas
 {
     class AverageScores
     {
-        Boolean bFromFile = true;
+        Boolean bFromFile;
         const string EXIT_STRING = "x";
 
         protected List<Student> oStudentList;
@@ -43,6 +44,8 @@ namespace duomenu_apdorojimas
         {
             GradeTable oTable = new GradeTable();
 
+            oTable.setOutputToFile("output_studentai10.txt");
+
             oTable.printLine();
             oTable.printRow(new string[] { "Vardas", "Pavarde", "Galutinis(Vid.)", "Galutinis(Med.)" });
             oTable.printLine();
@@ -55,6 +58,8 @@ namespace duomenu_apdorojimas
             }
 
             oTable.printLine();
+
+            oTable.endFile();
         }
 
         protected void outputScoresFromConsole()
@@ -64,6 +69,8 @@ namespace duomenu_apdorojimas
             string sInput;
 
             GradeTable oTable = new GradeTable();
+
+            oTable.setOutputToConsole();
 
             Boolean isAverage;
 
@@ -89,7 +96,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "kursiokai.txt";
+            const string path = "Studentai.txt";
             Boolean bFirstLine = true;
             string line;
 
@@ -112,7 +119,7 @@ namespace duomenu_apdorojimas
                     oStudentList.Add(oStudent);
                 }
             }
-            catch
+            catch (Exception e)
             {
                 Console.WriteLine($"Nepavyko nuskaityti failo '{path}'");
             }
@@ -125,20 +132,17 @@ namespace duomenu_apdorojimas
 
         protected Student inputStudentFromLine(string sLine)
         {
+            sLine = Regex.Replace(sLine, " {2,}", " ");
+            
+
             string[] sEntries = sLine.Split();
             Student oStudent = new Student();
-
-            if (sEntries.Length != 8)
-            {
-                Console.WriteLine("Netinkamo dydzio eilute.");
-
-                return oStudent;
-            }
+           
 
             oStudent.setFirstName(sEntries[0]);
             oStudent.setLastName(sEntries[1]);
 
-            for (int i = 2; i < 7; i++)
+            for (int i = 2; i < sEntries.Length - 2; i++)
             {
                 try
                 {
@@ -153,11 +157,11 @@ namespace duomenu_apdorojimas
             try
             {
 
-                oStudent.setExamGrade(sEntries[7]);
+                oStudent.setExamGrade(sEntries[sEntries.Length - 1]);
             }
             catch
             {
-                Console.WriteLine("Netinkamas egzamino pazymys: " + sEntries[7]);
+                Console.WriteLine("Netinkamas egzamino pazymys: " + sEntries[sEntries.Length - 1]);
             }
 
             return oStudent;

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace duomenu_apdorojimas
@@ -191,6 +192,23 @@ namespace duomenu_apdorojimas
         public string getFormattedFinalGrade(Boolean isAverage)
         {
             return getFinalGrade(isAverage).ToString("0.00");
+        }
+
+        public override string ToString()
+        {
+            String sLine = "";
+
+            sLine += getFirstName() + " ";
+            sLine += getLastName() + " ";
+
+            for (int i = 0; i<5; i++)
+            {
+                sLine += grades[i] + " ";
+            }
+
+            sLine += getExamGrade();
+
+            return sLine;
         }
     }
 }
