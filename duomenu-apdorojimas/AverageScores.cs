@@ -119,7 +119,7 @@ namespace duomenu_apdorojimas
                     oStudentList.Add(oStudent);
                 }
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine($"Nepavyko nuskaityti failo '{path}'");
             }
@@ -133,11 +133,9 @@ namespace duomenu_apdorojimas
         protected Student inputStudentFromLine(string sLine)
         {
             sLine = Regex.Replace(sLine, " {2,}", " ");
-            
 
             string[] sEntries = sLine.Split();
             Student oStudent = new Student();
-           
 
             oStudent.setFirstName(sEntries[0]);
             oStudent.setLastName(sEntries[1]);
@@ -231,8 +229,7 @@ namespace duomenu_apdorojimas
             {
                 Console.WriteLine($"Nepavyko nuskaityti '{inputString}'");
             }
-
-
+            
             return oStudent;
         }
     }
