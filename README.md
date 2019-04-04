@@ -8,3 +8,14 @@ Studentų nuskaitymas iš failo ir surūšiuotas rezultatų išvedimas lentelėj
 
 ## v0.3
 Patobulintas klaidų apdorojimas.
+
+## v0.4
+Studentų suskirstymas į kategorijas. Išmatuotas programos veikimo laikas nuskaitant studentus iš failo, priklausomai nuo studentų skaičiaus. Rezultatai pateikiami lentelėje: 
+
+| Studentų skaičius | Užtruko laiko (ss:ms) |
+|---------------|----------------------|
+| 10            | 00.0105739           |
+| 100           | 00.0162070           |
+| 1000          | 00.0474129           |
+| 10000         | 00.1749180           |
+| 100000        | 01.3508633           |
