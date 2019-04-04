@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace duomenu_apdorojimas
@@ -10,6 +11,8 @@ namespace duomenu_apdorojimas
         const string EXIT_STRING = "x";
 
         protected List<Student> oStudentList;
+
+        Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
@@ -23,6 +26,8 @@ namespace duomenu_apdorojimas
             Console.WriteLine("Jei norite nuskaityti studentus is failo, iveskit 'f'. Jei norite dirbti su konsole - bet koki kita simboliu.");
 
             inputString = Console.ReadLine();
+
+            stopwatch.Start();
 
             bFromFile = (inputString == "f");
 
@@ -38,28 +43,41 @@ namespace duomenu_apdorojimas
                 outputScoresFromFile();
             else
                 outputScoresFromConsole();
+
+            stopwatch.Stop();
+
+            Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
         }
 
         protected void outputScoresFromFile()
         {
-            GradeTable oTable = new GradeTable();
+            GradeTable oGoodGradesTrable = new GradeTable();
+            GradeTable oBadGradesTrable = new GradeTable();
+            
+            oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
+            oBadGradesTrable.setOutputToFile("vargsiukai_studentai10.txt");
 
-            oTable.setOutputToFile("output_studentai10.txt");
-
-            oTable.printLine();
-            oTable.printRow(new string[] { "Vardas", "Pavarde", "Galutinis(Vid.)", "Galutinis(Med.)" });
-            oTable.printLine();
+            oGoodGradesTrable.printHeader();
+            oBadGradesTrable.printHeader();
 
             oStudentList.Sort((x, y) => string.Compare(x.getFirstName(), y.getFirstName()));
 
             foreach (Student oStudent in oStudentList)
             {
-                oTable.printRow(new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) });
+                double dFinalGrade = oStudent.getFinalGrade(true);
+                string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
+
+                if (dFinalGrade >= 5.0)
+                    oGoodGradesTrable.printRow(sRow);
+                else if (dFinalGrade < 5.0)
+                    oBadGradesTrable.printRow(sRow);
             }
 
-            oTable.printLine();
+            oGoodGradesTrable.printLine();
+            oGoodGradesTrable.endFile();
 
-            oTable.endFile();
+            oBadGradesTrable.printLine();
+            oBadGradesTrable.endFile();
         }
 
         protected void outputScoresFromConsole()
@@ -96,7 +114,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai.txt";
+            const string path = "Studentai10.txt";
             Boolean bFirstLine = true;
             string line;
 

@@ -42,6 +42,14 @@ namespace duomenu_apdorojimas
             this.eOutputTarget = eTarget;
         }
 
+
+        public void printHeader()
+        {
+            printLine();
+            printRow(new string[] { "Vardas", "Pavarde", "Galutinis(Vid.)", "Galutinis(Med.)" });
+            printLine();
+        }
+
         public void printLine()
         {
             printRow(new string('-', tableWidth));

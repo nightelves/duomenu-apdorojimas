@@ -184,7 +184,7 @@ namespace duomenu_apdorojimas
 #endif
         }
 
-        protected double getFinalGrade(Boolean isAverage)
+        public double getFinalGrade(Boolean isAverage)
         {
             return 0.3 * (isAverage ? getAverage() : getMedian()) + 0.7 * getExamGrade();
         }
@@ -210,5 +210,6 @@ namespace duomenu_apdorojimas
 
             return sLine;
         }
+
     }
 }
