@@ -54,4 +54,18 @@ Išmatuotas programos naudojama atmintis pagal 1 strategija. Naudojama atmintis 
 
 Naudojant 1 strategiją, pagal spartą greičiausias yra `Deque`, iškart po jo - `List`, o lečiausiai veikė `LinkedList`. Mažiausiai atminties naudoja `List`, kiek daugiau naudoja `Deque`, o daugiausia `LinkedList`. Renkantis pagal spartą, geriausias konteineris yra `Deque`, pagal atmintį - `List`, blogiausiai pasirodė `LinkedList`.
 
+Naudojant šią strategiją yra naudojama daugiau atminties - pavyzdziui `Deque` su 100000 studentų naudoja 1585152 baitais daugiau negu prieš tai esanti versija su tokia pačia struktūra ir studentu skaičiumi.
+
 ### 2 strategija
+
+| Konteineris   | 10         | 100        | 1000       | 10000      | 100000     |
+|---------------|------------|------------|------------|------------|------------|
+| List<T>       | 00.0102766 | 00.0121702 | 00.0241046 | 00.1545364 | 03.0154789 |
+| LinkedList<T> |            |            |            |            |            |
+| Deque<T>      |            |            |            |            |            |
+
+| Konteineris   | 10       | 100      | 1000     | 10000    | 100000   |
+|---------------|----------|----------|----------|----------|----------|
+| List<T>       | 16199680 | 16642048 | 19095552 | 22118400 | 52572160 |
+| LinkedList<T> |          |          |          |          |          |
+| Deque<T>      |          |          |          |          |          |

@@ -57,8 +57,7 @@ namespace duomenu_apdorojimas
         {
             GradeTable oGoodGradesTrable = new GradeTable();
             GradeTable oBadGradesTrable = new GradeTable();
-
-            List<Student> oGoodStudentList = new List<Student>();
+            
             List<Student> oBadStudentList = new List<Student>();
 
             oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
@@ -68,20 +67,24 @@ namespace duomenu_apdorojimas
             oBadGradesTrable.printHeader();
 
             oStudentList.OrderBy(x => x.getFirstName());
+            
             //oStudentList.Sort((x, y) => string.Compare(x.getFirstName(), y.getFirstName()));
 
-            foreach (Student oStudent in oStudentList)
+            for (int i=0; i < oStudentList.Count; i++)
             {
+                Student oStudent = oStudentList.ElementAt(i);
+
                 double dFinalGrade = oStudent.getFinalGrade(true);
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
 
-                if (dFinalGrade >= 5.0)
-                    oGoodStudentList.Add(oStudent);
-                else if (dFinalGrade < 5.0)
+                if (dFinalGrade < 5.0)
+                {
                     oBadStudentList.Add(oStudent);
+                    oStudentList.RemoveAt(i);
+                }
             }
 
-            foreach (Student oStudent in oGoodStudentList)
+            foreach (Student oStudent in oStudentList)
             {
                 double dFinalGrade = oStudent.getFinalGrade(true);
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
