@@ -23,7 +23,7 @@ Studentų suskirstymas į kategorijas. Išmatuotas programos veikimo laikas nusk
 Didėjant studentų skaičiui, didėja ir veikimo laikas.
 
 ## v0.5
-Išmatuotas programos veikimo laikas su skirtingais konteineriais. 
+Išmatuotas programos veikimo laikas su skirtingais konteineriais ir skirtingais studentų skaičiais. Rezultatai pateikiami lentelėje (laikas atvaizduojamus ss:ms formatu);
 
 | Konteineris   | 10         | 100        | 1000       | 10000      | 100000     |
 |---------------|------------|------------|------------|------------|------------|
