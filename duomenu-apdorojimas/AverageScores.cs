@@ -12,13 +12,13 @@ namespace duomenu_apdorojimas
 
         bool bFromFile = false;
 
-        protected List<Student> oStudentList;
+        protected LinkedList<Student> oStudentList;
 
         Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
-            oStudentList = new List<Student>();
+            oStudentList = new LinkedList<Student>();
         }
 
         public void inputStudents()
@@ -57,8 +57,8 @@ namespace duomenu_apdorojimas
         {
             GradeTable oGoodGradesTrable = new GradeTable();
             GradeTable oBadGradesTrable = new GradeTable();
-            
-            List<Student> oBadStudentList = new List<Student>();
+
+            LinkedList<Student> oBadStudentList = new LinkedList<Student>();
 
             oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
             oBadGradesTrable.setOutputToFile("vargsiukai_studentai10.txt");
@@ -67,21 +67,26 @@ namespace duomenu_apdorojimas
             oBadGradesTrable.printHeader();
 
             oStudentList.OrderBy(x => x.getFirstName());
-            
+
             //oStudentList.Sort((x, y) => string.Compare(x.getFirstName(), y.getFirstName()));
 
-            for (int i=0; i < oStudentList.Count; i++)
+            var node = oStudentList.First;
+            while (node != null)
             {
-                Student oStudent = oStudentList.ElementAt(i);
+                var next = node.Next;
+
+                Student oStudent = node.Value;
 
                 double dFinalGrade = oStudent.getFinalGrade(true);
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
 
                 if (dFinalGrade < 5.0)
                 {
-                    oBadStudentList.Add(oStudent);
-                    oStudentList.RemoveAt(i);
+                    oBadStudentList.AddLast(oStudent);
+                    oStudentList.Remove(node);
                 }
+
+                node = next;
             }
 
             foreach (Student oStudent in oStudentList)
@@ -141,7 +146,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai10.txt";
+            const string path = "Studentai100000.txt";
             Boolean bFirstLine = true;
             string line;
 
@@ -161,7 +166,7 @@ namespace duomenu_apdorojimas
 
                     Student oStudent = inputStudentFromLine(line);
 
-                    oStudentList.Add(oStudent);
+                    oStudentList.AddLast(oStudent);
                 }
             }
             catch
@@ -220,7 +225,7 @@ namespace duomenu_apdorojimas
 
                 Student oStudent = inputStudentFromConsole();
 
-                oStudentList.Add(oStudent);
+                oStudentList.AddLast(oStudent);
 
                 Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 't', jei norite paskaiciuoti balus - bet koki kita simboli");
                 inputString = Console.ReadLine();
