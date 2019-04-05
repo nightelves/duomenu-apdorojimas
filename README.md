@@ -57,15 +57,22 @@ Naudojant 1 strategiją, pagal spartą greičiausias yra `Deque`, iškart po jo 
 Naudojant šią strategiją yra naudojama daugiau atminties - pavyzdziui `Deque` su 100000 studentų naudoja 1585152 baitais daugiau negu prieš tai esanti versija su tokia pačia struktūra ir studentu skaičiumi.
 
 ### 2 strategija
+Išmatuotas programos veikimo laikas pagal 2 strategija. Rezultatai pateikiami lentelėje (laikas atvaizduojamus ss:ms formatu);
 
 | Konteineris   | 10         | 100        | 1000       | 10000      | 100000     |
 |---------------|------------|------------|------------|------------|------------|
-| List<T>       | 00.0102766 | 00.0121702 | 00.0241046 | 00.1545364 | 03.0154789 |
-| LinkedList<T> | 00.0103353 | 00.0406509 | 00.0367516 | 00.1609296 | 01.3043825 |
-| Deque<T>      | 00.0113243 | 00.0265129 | 00.0625673 | 00.1543366 | 01.0570848 |
+| List<T>       | 00.0102766 | 00.0121702 | 00.0241046 | 00.1545364 | 01.8154789 |
+| LinkedList<T> | 00.0103353 | 00.0286509 | 00.0367516 | 00.1409296 | 01.3043825 |
+| Deque<T>      | 00.0113243 | 00.0265129 | 00.0325673 | 00.1543366 | 01.0570848 |
+
+Išmatuotas programos naudojama atmintis pagal 2 strategija. Naudojama atmintis pateikiamia lentelėje (bitais);
 
 | Konteineris   | 10       | 100      | 1000     | 10000    | 100000   |
 |---------------|----------|----------|----------|----------|----------|
 | List<T>       | 16199680 | 16642048 | 19095552 | 22118400 | 52572160 |
 | LinkedList<T> | 16093184 | 16576512 | 19116032 | 22523904 | 58454016 |
 | Deque<T>      | 16154624 | 16687104 | 19144704 | 22384640 | 53248000 |
+
+Naudojant 2 strategija, pagal sparta greičiausias `Deque`, po jo - `LinkedList`, o lečiausiai veikė `List`.
+
+Palyginus su 1 strategija, yra naudojama mažiau atminties. Sparta yra panaši.
