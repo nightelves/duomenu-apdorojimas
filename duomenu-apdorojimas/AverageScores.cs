@@ -7,8 +7,9 @@ namespace duomenu_apdorojimas
 {
     class AverageScores
     {
-        Boolean bFromFile;
         const string EXIT_STRING = "x";
+
+        bool bFromFile = false;
 
         protected List<Student> oStudentList;
 
@@ -35,6 +36,10 @@ namespace duomenu_apdorojimas
                 inputFromFile();
             else
                 inputFromConsole();
+
+            stopwatch.Stop();
+
+            Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
         }
 
         public void outputScores()
@@ -43,10 +48,6 @@ namespace duomenu_apdorojimas
                 outputScoresFromFile();
             else
                 outputScoresFromConsole();
-
-            stopwatch.Stop();
-
-            Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
         }
 
         protected void outputScoresFromFile()
