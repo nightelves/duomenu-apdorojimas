@@ -12,13 +12,13 @@ namespace duomenu_apdorojimas
 
         bool bFromFile = false;
 
-        protected Queue<Student> oStudentList;
+        protected Deque<Student> oStudentList;
 
         Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
-            oStudentList = new Queue<Student>();
+            oStudentList = new Deque<Student>();
         }
 
         public void inputStudents()
@@ -37,11 +37,8 @@ namespace duomenu_apdorojimas
                 inputFromFile();
             else
                 inputFromConsole();
-
-            oStudentList.Dequeue();
-
+            
             stopwatch.Stop();
-
             Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
         }
 
@@ -57,7 +54,7 @@ namespace duomenu_apdorojimas
         {
             GradeTable oGoodGradesTrable = new GradeTable();
             GradeTable oBadGradesTrable = new GradeTable();
-            
+
             oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
             oBadGradesTrable.setOutputToFile("vargsiukai_studentai10.txt");
 
@@ -119,7 +116,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai100000.txt";
+            const string path = "Studentai10.txt";
             Boolean bFirstLine = true;
             string line;
 
@@ -139,7 +136,7 @@ namespace duomenu_apdorojimas
 
                     Student oStudent = inputStudentFromLine(line);
 
-                    oStudentList.Enqueue(oStudent);
+                    oStudentList.AddBack(oStudent);
                 }
             }
             catch
@@ -198,7 +195,7 @@ namespace duomenu_apdorojimas
 
                 Student oStudent = inputStudentFromConsole();
 
-                oStudentList.Enqueue(oStudent);
+                oStudentList.AddBack(oStudent);
 
                 Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 't', jei norite paskaiciuoti balus - bet koki kita simboli");
                 inputString = Console.ReadLine();
@@ -252,7 +249,7 @@ namespace duomenu_apdorojimas
             {
                 Console.WriteLine($"Nepavyko nuskaityti '{inputString}'");
             }
-            
+
             return oStudent;
         }
     }
