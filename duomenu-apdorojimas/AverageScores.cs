@@ -12,13 +12,13 @@ namespace duomenu_apdorojimas
 
         bool bFromFile = false;
 
-        protected Queue<Student> oStudentList;
+        protected LinkedList<Student> oStudentList;
 
         Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
-            oStudentList = new Queue<Student>();
+            oStudentList = new LinkedList<Student>();
         }
 
         public void inputStudents()
@@ -37,8 +37,6 @@ namespace duomenu_apdorojimas
                 inputFromFile();
             else
                 inputFromConsole();
-
-            oStudentList.Dequeue();
         }
 
         public void outputScores()
@@ -61,8 +59,8 @@ namespace duomenu_apdorojimas
             GradeTable oGoodGradesTrable = new GradeTable();
             GradeTable oBadGradesTrable = new GradeTable();
 
-            Queue<Student> oGoodStudentList = new Queue<Student>();
-            Queue<Student> oBadStudentList = new Queue<Student>();
+            LinkedList<Student> oGoodStudentList = new LinkedList<Student>();
+            LinkedList<Student> oBadStudentList = new LinkedList<Student>();
 
             oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
             oBadGradesTrable.setOutputToFile("vargsiukai_studentai10.txt");
@@ -79,9 +77,9 @@ namespace duomenu_apdorojimas
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
 
                 if (dFinalGrade >= 5.0)
-                    oGoodStudentList.Enqueue(oStudent);
+                    oGoodStudentList.AddLast(oStudent);
                 else if (dFinalGrade < 5.0)
-                    oBadStudentList.Enqueue(oStudent);
+                    oBadStudentList.AddLast(oStudent);
             }
 
             foreach (Student oStudent in oGoodStudentList)
@@ -141,7 +139,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai10.txt";
+            const string path = "Studentai100000.txt";
             Boolean bFirstLine = true;
             string line;
 
@@ -161,7 +159,7 @@ namespace duomenu_apdorojimas
 
                     Student oStudent = inputStudentFromLine(line);
 
-                    oStudentList.Enqueue(oStudent);
+                    oStudentList.AddLast(oStudent);
                 }
             }
             catch
@@ -220,7 +218,7 @@ namespace duomenu_apdorojimas
 
                 Student oStudent = inputStudentFromConsole();
 
-                oStudentList.Enqueue(oStudent);
+                oStudentList.AddLast(oStudent);
 
                 Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 't', jei norite paskaiciuoti balus - bet koki kita simboli");
                 inputString = Console.ReadLine();
