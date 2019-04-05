@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace duomenu_apdorojimas
@@ -11,13 +12,13 @@ namespace duomenu_apdorojimas
 
         bool bFromFile = false;
 
-        protected List<Student> oStudentList;
+        protected LinkedList<Student> oStudentList;
 
         Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
-            oStudentList = new List<Student>();
+            oStudentList = new LinkedList<Student>();
         }
 
         public void inputStudents()
@@ -61,7 +62,8 @@ namespace duomenu_apdorojimas
             oGoodGradesTrable.printHeader();
             oBadGradesTrable.printHeader();
 
-            oStudentList.Sort((x, y) => string.Compare(x.getFirstName(), y.getFirstName()));
+            oStudentList.OrderBy(x => x.getFirstName());
+            //oStudentList.Sort((x, y) => string.Compare(x.getFirstName(), y.getFirstName()));
 
             foreach (Student oStudent in oStudentList)
             {
@@ -115,7 +117,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai100000.txt";
+            const string path = "Studentai10.txt";
             Boolean bFirstLine = true;
             string line;
 
@@ -135,7 +137,7 @@ namespace duomenu_apdorojimas
 
                     Student oStudent = inputStudentFromLine(line);
 
-                    oStudentList.Add(oStudent);
+                    oStudentList.AddLast(oStudent);
                 }
             }
             catch
@@ -194,7 +196,7 @@ namespace duomenu_apdorojimas
 
                 Student oStudent = inputStudentFromConsole();
 
-                oStudentList.Add(oStudent);
+                oStudentList.AddLast(oStudent);
 
                 Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 't', jei norite paskaiciuoti balus - bet koki kita simboli");
                 inputString = Console.ReadLine();
