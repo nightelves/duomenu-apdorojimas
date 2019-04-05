@@ -12,13 +12,13 @@ namespace duomenu_apdorojimas
 
         bool bFromFile = false;
 
-        protected LinkedList<Student> oStudentList;
+        protected Queue<Student> oStudentList;
 
         Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
-            oStudentList = new LinkedList<Student>();
+            oStudentList = new Queue<Student>();
         }
 
         public void inputStudents()
@@ -37,6 +37,8 @@ namespace duomenu_apdorojimas
                 inputFromFile();
             else
                 inputFromConsole();
+
+            oStudentList.Dequeue();
 
             stopwatch.Stop();
 
@@ -117,7 +119,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai10.txt";
+            const string path = "Studentai100000.txt";
             Boolean bFirstLine = true;
             string line;
 
@@ -137,7 +139,7 @@ namespace duomenu_apdorojimas
 
                     Student oStudent = inputStudentFromLine(line);
 
-                    oStudentList.AddLast(oStudent);
+                    oStudentList.Enqueue(oStudent);
                 }
             }
             catch
@@ -196,7 +198,7 @@ namespace duomenu_apdorojimas
 
                 Student oStudent = inputStudentFromConsole();
 
-                oStudentList.AddLast(oStudent);
+                oStudentList.Enqueue(oStudent);
 
                 Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 't', jei norite paskaiciuoti balus - bet koki kita simboli");
                 inputString = Console.ReadLine();
