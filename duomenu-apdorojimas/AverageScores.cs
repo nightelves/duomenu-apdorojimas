@@ -115,7 +115,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai10.txt";
+            const string path = "Studentai100000.txt";
             Boolean bFirstLine = true;
             string line;
 

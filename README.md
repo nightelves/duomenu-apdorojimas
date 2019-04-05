@@ -21,3 +21,9 @@ Studentų suskirstymas į kategorijas. Išmatuotas programos veikimo laikas nusk
 | 100000        | 01.3508633           |
 
 Didėjant studentų skaičiui, didėja ir veikimo laikas.
+
+## v0.5
+
+| Konteineris   | 10         | 100        | 1000       | 10000      | 100000     |
+|---------------|------------|------------|------------|------------|------------|
+| List<T>       | 00.0105739 | 00.0299065 | 00.0340985 | 00.1076318 | 00.7782735 |
