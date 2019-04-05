@@ -60,7 +60,10 @@ namespace duomenu_apdorojimas
         {
             GradeTable oGoodGradesTrable = new GradeTable();
             GradeTable oBadGradesTrable = new GradeTable();
-            
+
+            Queue<Student> oGoodStudentList = new Queue<Student>();
+            Queue<Student> oBadStudentList = new Queue<Student>();
+
             oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
             oBadGradesTrable.setOutputToFile("vargsiukai_studentai10.txt");
 
@@ -76,9 +79,25 @@ namespace duomenu_apdorojimas
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
 
                 if (dFinalGrade >= 5.0)
-                    oGoodGradesTrable.printRow(sRow);
+                    oGoodStudentList.Enqueue(oStudent);
                 else if (dFinalGrade < 5.0)
-                    oBadGradesTrable.printRow(sRow);
+                    oBadStudentList.Enqueue(oStudent);
+            }
+
+            foreach (Student oStudent in oGoodStudentList)
+            {
+                double dFinalGrade = oStudent.getFinalGrade(true);
+                string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
+                
+                oGoodGradesTrable.printRow(sRow);
+            }
+
+            foreach (Student oStudent in oBadStudentList)
+            {
+                double dFinalGrade = oStudent.getFinalGrade(true);
+                string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
+
+                oBadGradesTrable.printRow(sRow);
             }
 
             oGoodGradesTrable.printLine();
@@ -122,7 +141,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai100000.txt";
+            const string path = "Studentai10.txt";
             Boolean bFirstLine = true;
             string line;
 
