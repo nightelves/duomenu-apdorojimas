@@ -39,10 +39,6 @@ namespace duomenu_apdorojimas
                 inputFromConsole();
 
             oStudentList.Dequeue();
-
-            stopwatch.Stop();
-
-            Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
         }
 
         public void outputScores()
@@ -51,6 +47,13 @@ namespace duomenu_apdorojimas
                 outputScoresFromFile();
             else
                 outputScoresFromConsole();
+            
+            stopwatch.Stop();
+
+            Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
+
+            Process proc = Process.GetCurrentProcess();
+            Console.WriteLine("Naudojama atmintis: {0}", proc.PrivateMemorySize64);
         }
 
         protected void outputScoresFromFile()
