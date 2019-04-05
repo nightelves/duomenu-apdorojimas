@@ -12,13 +12,13 @@ namespace duomenu_apdorojimas
 
         bool bFromFile = false;
 
-        protected LinkedList<Student> oStudentList;
+        protected List<Student> oStudentList;
 
         Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
-            oStudentList = new LinkedList<Student>();
+            oStudentList = new List<Student>();
         }
 
         public void inputStudents()
@@ -45,9 +45,8 @@ namespace duomenu_apdorojimas
                 outputScoresFromFile();
             else
                 outputScoresFromConsole();
-            
-            stopwatch.Stop();
 
+            stopwatch.Stop();
             Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
 
             Process proc = Process.GetCurrentProcess();
@@ -59,8 +58,8 @@ namespace duomenu_apdorojimas
             GradeTable oGoodGradesTrable = new GradeTable();
             GradeTable oBadGradesTrable = new GradeTable();
 
-            LinkedList<Student> oGoodStudentList = new LinkedList<Student>();
-            LinkedList<Student> oBadStudentList = new LinkedList<Student>();
+            List<Student> oGoodStudentList = new List<Student>();
+            List<Student> oBadStudentList = new List<Student>();
 
             oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
             oBadGradesTrable.setOutputToFile("vargsiukai_studentai10.txt");
@@ -77,16 +76,16 @@ namespace duomenu_apdorojimas
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
 
                 if (dFinalGrade >= 5.0)
-                    oGoodStudentList.AddLast(oStudent);
+                    oGoodStudentList.Add(oStudent);
                 else if (dFinalGrade < 5.0)
-                    oBadStudentList.AddLast(oStudent);
+                    oBadStudentList.Add(oStudent);
             }
 
             foreach (Student oStudent in oGoodStudentList)
             {
                 double dFinalGrade = oStudent.getFinalGrade(true);
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
-                
+
                 oGoodGradesTrable.printRow(sRow);
             }
 
@@ -139,7 +138,7 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai100000.txt";
+            const string path = "Studentai10.txt";
             Boolean bFirstLine = true;
             string line;
 
@@ -159,7 +158,7 @@ namespace duomenu_apdorojimas
 
                     Student oStudent = inputStudentFromLine(line);
 
-                    oStudentList.AddLast(oStudent);
+                    oStudentList.Add(oStudent);
                 }
             }
             catch
@@ -218,7 +217,7 @@ namespace duomenu_apdorojimas
 
                 Student oStudent = inputStudentFromConsole();
 
-                oStudentList.AddLast(oStudent);
+                oStudentList.Add(oStudent);
 
                 Console.WriteLine("Studentas pridetas. Jei norite prideti kita studenta - iveskite 't', jei norite paskaiciuoti balus - bet koki kita simboli");
                 inputString = Console.ReadLine();
@@ -272,7 +271,7 @@ namespace duomenu_apdorojimas
             {
                 Console.WriteLine($"Nepavyko nuskaityti '{inputString}'");
             }
-            
+
             return oStudent;
         }
     }

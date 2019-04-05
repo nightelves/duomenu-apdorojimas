@@ -36,17 +36,22 @@ Greičiausias - `LinkedList`, lečiausias - `List`
 ## v1.0
 
 ### 1 strategija
+Išmatuotas programos veikimo laikas pagal 1 strategija. Rezultatai pateikiami lentelėje (laikas atvaizduojamus ss:ms formatu);
 
 | Konteineris   | 10         | 100        | 1000       | 10000      | 100000     |
 |---------------|------------|------------|------------|------------|------------|
-| List<T>       |            |            |            |            |            |
-| LinkedList<T> | 00.0177115 | 00.0211130 | 00.0370386 | 00.1605567 | 01.2686796 |
-| Deque<T>      | 00.0125775 | 00.0198390 | 00.0252961 | 00.1588843 | 01.1896728 |
+| List &lt;T&gt;       | 00.0192976 | 00.0213836 | 00.0361253 | 00.1423622 | 01.1887621 |
+| LinkedList &lt;T&gt; | 00.0177115 | 00.0211130 | 00.0370386 | 00.1605567 | 01.2686796 |
+| Deque &lt;T&gt;      | 00.0125775 | 00.0198390 | 00.0252961 | 00.1588843 | 01.1896728 |
+
+Išmatuotas programos naudojama atmintis pagal 1 strategija. Naudojama atmintis pateikiamia lentelėje (bitais);
 
 | Konteineris   | 10       | 100      | 1000     | 10000    | 100000   |
 |---------------|----------|----------|----------|----------|----------|
-| List<T>       |          |          |          |          |          |
-| LinkedList<T> | 16138240 | 16592896 | 19079168 | 22994944 | 67571712 |
-| Deque<T>      | 16596992 | 16617472 | 19116032 | 22900736 | 54140928 |
+| List &lt;T&gt;       | 16134144 | 16703488 | 19173376 | 19173376 | 54001664 |
+| LinkedList &lt;T&gt; | 16138240 | 16592896 | 19079168 | 19079168 | 67571712 |
+| Deque &lt;T&gt;      | 16596992 | 16617472 | 19116032 | 19116032 | 54140928 |
+
+Naudojant 1 strategiją, pagal spartą greičiausias yra `Deque`, iškart po jo - `List`, o lečiausiai veikė `LinkedList`. Mažiausiai atminties naudoja `List`, kiek daugiau naudoja `Deque`, o daugiausia `LinkedList`. Renkantis pagal spartą, geriausias konteineris yra `Deque`, pagal atmintį - `List`, blogiausiai pasirodė `LinkedList`.
 
 ### 2 strategija
