@@ -74,7 +74,7 @@ namespace duomenu_apdorojimas
             for (int i = 0; i < oStudentList.Count; i++)
             {
                 Student oStudent = oStudentList.Get(0);
-
+                
                 double dFinalGrade = oStudent.getFinalGrade(true);
 
                 if (dFinalGrade < 5.0)
@@ -92,8 +92,7 @@ namespace duomenu_apdorojimas
             for (int i = 0; i < oStudentList.Count; ++i)
             {
                 Student oStudent = oStudentList.Get(i);
-
-                double dFinalGrade = oStudent.getFinalGrade(true);
+                
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
 
                 oGoodGradesTrable.printRow(sRow);
@@ -102,8 +101,7 @@ namespace duomenu_apdorojimas
             for (int i = 0; i < oBadStudentList.Count; ++i)
             {
                 Student oStudent = oBadStudentList.Get(i);
-
-                double dFinalGrade = oStudent.getFinalGrade(true);
+                
                 string[] sRow = new string[] { oStudent.getFirstName(), oStudent.getLastName(), oStudent.getFormattedFinalGrade(true), oStudent.getFormattedFinalGrade(false) };
 
                 oBadGradesTrable.printRow(sRow);
@@ -198,7 +196,7 @@ namespace duomenu_apdorojimas
             oStudent.setFirstName(sEntries[0]);
             oStudent.setLastName(sEntries[1]);
 
-            for (int i = 2; i < sEntries.Length - 2; i++)
+            for (int i = 2; i < sEntries.Length - 1; i++)
             {
                 try
                 {
