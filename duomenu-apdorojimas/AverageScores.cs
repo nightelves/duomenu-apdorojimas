@@ -8,13 +8,14 @@ namespace duomenu_apdorojimas
 {
     class AverageScores
     {
-        const string EXIT_STRING = "x";
+        protected const string EXIT_STRING = "x";
 
-        bool bFromFile = false;
+        protected bool bFromFile = false;
 
         protected Deque<Student> oStudentList;
+        protected string sFileName;
 
-        Stopwatch stopwatch = new Stopwatch();
+        protected Stopwatch stopwatch = new Stopwatch();
 
         public AverageScores()
         {
@@ -50,7 +51,7 @@ namespace duomenu_apdorojimas
             Console.WriteLine("Uztruko laiko: {0}", stopwatch.Elapsed);
 
             Process proc = Process.GetCurrentProcess();
-            Console.WriteLine("Naudojama atmintis: {0}", proc.PrivateMemorySize64);
+            Console.WriteLine("Naudojama atmintis (baitais): {0}", proc.PrivateMemorySize64);
         }
 
         protected void outputScoresFromFile()
@@ -60,8 +61,8 @@ namespace duomenu_apdorojimas
 
             Deque<Student> oBadStudentList = new Deque<Student>();
 
-            oGoodGradesTrable.setOutputToFile("kietiakai_studentai10.txt");
-            oBadGradesTrable.setOutputToFile("vargsiukai_studentai10.txt");
+            oGoodGradesTrable.setOutputToFile("kietiakai_studentai.txt");
+            oBadGradesTrable.setOutputToFile("vargsiukai_studentai.txt");
 
             oGoodGradesTrable.printHeader();
             oBadGradesTrable.printHeader();
@@ -149,16 +150,20 @@ namespace duomenu_apdorojimas
 
         protected void inputFromFile()
         {
-            const string path = "Studentai10.txt";
             Boolean bFirstLine = true;
             string line;
 
-            Console.WriteLine("Nuskaitome is failo.");
+            Console.WriteLine("Iveskite, is kokio failo skaityti.");
+
+            sFileName = Console.ReadLine();
 
             System.IO.StreamReader file = null;
             try
             {
-                file = new System.IO.StreamReader(path);
+                file = new System.IO.StreamReader(sFileName);
+
+                Console.WriteLine("Nuskaitome is failo...");
+
                 while ((line = file.ReadLine()) != null)
                 {
                     if (bFirstLine)
@@ -174,7 +179,7 @@ namespace duomenu_apdorojimas
             }
             catch
             {
-                Console.WriteLine($"Nepavyko nuskaityti failo '{path}'");
+                Console.WriteLine($"Nepavyko nuskaityti failo '{sFileName}'");
             }
             finally
             {

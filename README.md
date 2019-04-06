@@ -44,7 +44,7 @@ Išmatuotas programos veikimo laikas pagal 1 strategija. Rezultatai pateikiami l
 | LinkedList &lt;T&gt; | 00.0177115 | 00.0211130 | 00.0370386 | 00.1605567 | 01.2686796 |
 | Deque &lt;T&gt;      | 00.0125775 | 00.0198390 | 00.0252961 | 00.1588843 | 01.1896728 |
 
-Išmatuotas programos naudojama atmintis pagal 1 strategija. Naudojama atmintis pateikiamia lentelėje (bitais);
+Išmatuotas programos naudojama atmintis pagal 1 strategija. Naudojama atmintis pateikiamia lentelėje (baitais);
 
 | Konteineris   | 10       | 100      | 1000     | 10000    | 100000   |
 |---------------|----------|----------|----------|----------|----------|
@@ -65,7 +65,7 @@ Išmatuotas programos veikimo laikas pagal 2 strategija. Rezultatai pateikiami l
 | LinkedList<T> | 00.0103353 | 00.0286509 | 00.0367516 | 00.1409296 | 01.3043825 |
 | Deque<T>      | 00.0113243 | 00.0265129 | 00.0325673 | 00.1543366 | 01.0570848 |
 
-Išmatuotas programos naudojama atmintis pagal 2 strategija. Naudojama atmintis pateikiamia lentelėje (bitais);
+Išmatuotas programos naudojama atmintis pagal 2 strategija. Naudojama atmintis pateikiamia lentelėje (baitais);
 
 | Konteineris   | 10       | 100      | 1000     | 10000    | 100000   |
 |---------------|----------|----------|----------|----------|----------|
@@ -75,4 +75,4 @@ Išmatuotas programos naudojama atmintis pagal 2 strategija. Naudojama atmintis 
 
 Naudojant 2 strategija, pagal sparta greičiausias `Deque`, po jo - `LinkedList`, o lečiausiai veikė `List`.
 
-Palyginus su 1 strategija, yra naudojama mažiau atminties. Sparta yra panaši.
+Palyginus su 1 strategija, yra naudojama mažiau atminties, o sparta yra panaši.
